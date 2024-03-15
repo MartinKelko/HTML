@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formular</title>
+</head>
+<body>
+    <form action="/" method="POST">
+        <div>
+            <label for="fname"><b>First name:</b></label>
+            <input type="text" id="fname" name="fname" placeholder="Insert first name" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="lname"><b>Last name:</b></label>
+            <input type="text" id="lname" name="lname" placeholder="Insert last name" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="pass"><b>Password:</b></label>
+            <input type="password" id="pass" name="pass" maxlength="15" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="email"><b>Email:</b></label>
+            <input type="email" id="email" name="email" placeholder="Insert your email" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="phone"><b>Phone number:</b></label>
+            <input type="tel" id="phone" name="phone" placeholder="00421xxxxxx" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="title"><b>title:</b></label>
+            <label for="Mr"><b>Mr:</b></label>
+            <input type="radio" id="Mr" name="title" value="Mr">
+            <label for="Mrs"><b>Mrs:</b></label>
+            <input type="radio" id="Mrs" name="title" value="Mrs">
+            <label for="PhD"><b>PhD:</b></label>
+            <input type="radio" id="PhD" name="title" value="PhD">
+        </div>
+
+        <br>
+
+        <div>
+            <label for="jobgrade"><b>Select a job grade:</b></label>
+            <select name="jobgrade" id="jobgrade" required>
+                <option value="">None</option>
+                <option value="junior">Junior level</option>
+                <option value="mid">Mid level</option>
+                <option value="senior">Senior level</option>
+            </select>
+            <br><br>
+        </div>
+
+        <br>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
