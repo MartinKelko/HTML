@@ -1,24 +1,35 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
+from flask_mail import Mail, Message
 
-# Flask constructor
 app = Flask(__name__)
 
-# A decorator used to tell the application
-# which URL is associated with the function
+# Configure Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'martin2kelko@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Nepijemrum22'
+
+mail = Mail(app)
+
 @app.route('/', methods=["GET", "POST"])
 def process_form():
     if request.method == "POST":
-        # getting input with name = fname and lname in HTML form
-        first_name = request.form.get("fname")
-        last_name = request.form.get("lname")
-        password = request.form.get("pass")  # Include password if needed
+        email = request.form.get("email")
 
-        # You can perform further processing/validation here if necessary
+        if not email:
+            return jsonify({'error': 'Email address is required!'}), 400
 
-        return render_template("formular.html", first_name=first_name, last_name=last_name)
+        try:
+            msg = Message('Hello from Flask-Mail!',
+                          sender='martin2kelko@gmail.com', recipients=[email])
+            msg.body = 'This is a test email sent from Flask-Mail.'
+            mail.send(msg)
+            return jsonify({'message': 'Email sent successfully!'}), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
 
-    # Render the HTML form when the method is GET
-    return render_template("formular.html")
+    return render_template("form.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
