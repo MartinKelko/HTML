@@ -3,12 +3,12 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
 
-# Configure Flask-Mail
+# Configure Flask-Mail with application-specific password
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'martin2kelko@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Nepijemrum22'
+app.config['MAIL_PASSWORD'] = 'apxb snkd rucd vgco'
 
 mail = Mail(app)
 
@@ -29,7 +29,12 @@ def process_form():
         except Exception as e:
             return jsonify({'error': str(e)}), 500
 
-    return render_template("form.html")
+    # Render the formular.html template for GET requests
+    try:
+        return render_template("formular.html")
+    except Exception as e:
+        # Handle TemplateNotFound error
+        return jsonify({'error': f'Template not found: {str(e)}'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
